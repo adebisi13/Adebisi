@@ -1,4 +1,4 @@
-// script.js
+// ===== LOGO WAVE ANIMATION =====
 const logo = document.querySelector('.logo');
 const text = logo.textContent;
 logo.innerHTML = ''; // clear original text
@@ -10,7 +10,7 @@ text.split('').forEach((char, i) => {
   logo.appendChild(span);
 });
 
-
+// ===== REVEAL ON SCROLL =====
 function revealOnScroll() {
   const reveals = document.querySelectorAll(".reveal");
 
@@ -28,11 +28,9 @@ function revealOnScroll() {
 }
 
 window.addEventListener("scroll", revealOnScroll);
-
-// 👇 Run once immediately when the page loads
 window.addEventListener("load", revealOnScroll);
 
-// Typing effect
+// ===== TYPING EFFECT =====
 const typingElement = document.querySelector(".typing");
 const phrases = ["Frontend Developer", "Designer", "Problem Solver"];
 let phraseIndex = 0;
@@ -46,7 +44,6 @@ function loopTyping() {
   typingElement.innerHTML = currentPhrase.join("");
 
   if (phraseIndex < phrases.length) {
-
     if (!isDeleting && letterIndex <= phrases[phraseIndex].length) {
       currentPhrase.push(phrases[phraseIndex][letterIndex]);
       letterIndex++;
@@ -73,6 +70,7 @@ function loopTyping() {
       }
     }
   }
+
   const speedUp = Math.random() * (80 - 50) + 50;
   const normalSpeed = Math.random() * (200 - 100) + 100;
   const time = isEnd ? 1500 : isDeleting ? speedUp : normalSpeed;
@@ -81,38 +79,39 @@ function loopTyping() {
 
 loopTyping();
 
-
 // ===== CONTACT FORM HANDLING =====
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contactForm");
   const formMessage = document.getElementById("formMessage");
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const message = document.getElementById("message").value.trim();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
 
-    // Simple email regex
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      // Simple email regex
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!name || !email || !message) {
-      showMessage("⚠️ Please fill in all fields.", "error");
-      return;
-    }
+      if (!name || !email || !message) {
+        showMessage("⚠️ Please fill in all fields.", "error");
+        return;
+      }
 
-    if (!emailRegex.test(email)) {
-      showMessage("❌ Please enter a valid email address.", "error");
-      return;
-    }
+      if (!emailRegex.test(email)) {
+        showMessage("❌ Please enter a valid email address.", "error");
+        return;
+      }
 
-    // Simulate success
-    showMessage("✅ Message sent successfully!", "success");
+      // Simulate success
+      showMessage("✅ Message sent successfully!", "success");
 
-    // Reset form
-    form.reset();
-  });
+      // Reset form
+      form.reset();
+    });
+  }
 
   function showMessage(msg, type) {
     formMessage.textContent = msg;
@@ -134,13 +133,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// ===== MOBILE NAVBAR TOGGLE =====
-const menuToggle = document.querySelector(".menu-toggle");
-const navLinks = document.querySelector(".nav-links");
+// ===== NAVBAR TOGGLE =====
+(function () {
+  console.log("Navbar toggle script loaded");
 
-menuToggle.addEventListener("click", () => {
-  navLinks.classList.toggle("active");
-});
+  document.addEventListener("click", function (e) {
+    if (e.target.closest(".menu-toggle")) {
+      const nav = e.target.closest(".navbar");
+      const menu = nav.querySelector(".nav-links");
+      if (menu) {
+        menu.classList.menu-toggle("active");
+        const toggle = nav.querySelector(".menu-toggle");
+        if (toggle) toggle.setAttribute("aria-expanded", menu.classList.contains("active"));
+      }
+    }
+  });
+})();
+
 
 
 
