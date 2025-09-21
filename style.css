@@ -54,7 +54,7 @@ body {
 
 .nav-links a {
   text-decoration: none;
-  color: #fff;
+  color: goldenrod;
   font-weight: 500;
   position: relative;
   transition: color 0.3s ease;
@@ -83,6 +83,19 @@ body {
 .menu-toggle {
   display: none;
 }
+
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  color: goldenrod;
+  cursor: pointer;
+}
+
+.menu-toggle:checked + .hamburger + .nav-links {
+  display:flex;
+}
+
+
 
 /* ===== HERO SECTION ===== */
 .hero {
@@ -375,11 +388,19 @@ body {
 @media (max-width: 768px) {
   /* hamburger shows on mobile */
   .menu-toggle {
+    display: none;
+   }
+  .hamburger {
     display: block;
     font-size: 2rem;
     cursor: pointer;
     color: gold;
   }
+
+  .menu-toggle:checked + .hamburger + .nav-links {
+  display:flex;
+  flex-direction: column;
+}
 
 /* Mobile menu (hidden by default) */
 @media (max-width: 768px) {
@@ -397,10 +418,11 @@ body {
     z-index: 1000;
   }
 
-  /* When active, show the menu */
-  .nav-links.active {
-    display: flex;
-  }
+.menu-toggle:checked + .hamburger + .nav-links {
+  display:flex;
+  flex-direction: column;
+}
+
 
   /* Style links inside dropdown */
   .nav-links li {
@@ -416,32 +438,3 @@ body {
   .menu-toggle { display: none; }
 }
 
-@media (max-width: 768px) {
-  .nav-links {
-    display: flex;                /* keep flex so we can animate height */
-    flex-direction: column;
-    background: #111;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 220px;
-    padding: 0;                   /* padding will be animated in */
-    border: 1px solid gold;
-    border-radius: 10px;
-    z-index: 1000;
-
-    /* hidden state */
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(-8px);
-    transition: max-height .3s ease, opacity .2s ease, transform .3s ease, padding .2s ease;
-  }
-
-  .nav-links.active {
-    max-height: 320px;  /* big enough to fit all links */
-    opacity: 1;
-    transform: translateY(0);
-    padding: 1rem;
-  }
-}
